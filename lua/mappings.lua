@@ -13,6 +13,7 @@ vim.keymap.set("n", "<A-k>", "ddkPk<cr>")
 vim.keymap.set("n", "<A-j>", "ddpk<cr>")
 map_key_with_leader("n", "fs", "<cmd>Telescope find_files<cr>", {})
 map_key_with_leader("n", "t", "<cmd>Telescope<cr>", {})
+map_key_with_leader("n", "p", "<cmd>Telescope project<cr>", {})
 map_key_with_leader("n", "ff", "<cmd>Telescope current_buffer_fuzzy_find<cr>", {})
 
 vim.keymap.set("n", "<A-s>", require("mini.starter").open, {})
@@ -22,12 +23,6 @@ map_key_with_leader("n", "dd", require("neogen").generate, {})
 map_key_with_leader("n", "df", '<cmd>lua require("neogen").generate {type = "func"}<cr>', {})
 map_key_with_leader("n", "ds", '<cmd>lua require("neogen").generate {type = "class"}<cr>', {})
 map_key_with_leader("n", "dg", '<cmd>lua require("neogen").generate {type = "file"}<cr>', {})
-
--- Keybindings for the qf_helper plugin
-map_key_with_leader("n", "qn", "<cmd>QNext<cr>", {})
-map_key_with_leader("n", "qp", "<cmd>QPrev<cr>", {})
-map_key_with_leader("n", "qt", "<cmd>QFToggle<cr>", {})
-map_key_with_leader("n", "pt", "<cmd>LLToggle<cr>", {})
 
 map_key_with_leader("n", "w", require("nvim-window").pick, {})
 map_key_with_leader("n", "h", "<cmd>BufferLinePick<cr>", {})

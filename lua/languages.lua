@@ -45,6 +45,10 @@ require("rust-tools").setup({
 	},
 })
 
+require("haskell-tools").setup({
+	hls = { on_attach = on_attach, capabilities = capabilities, settings = { formattingProvider = "fourmolu" } },
+})
+
 local lsp_config = require("lspconfig")
 
 local function setup_langs(languages)
@@ -73,7 +77,6 @@ local languages = {
 			format = { enable = false }, -- Formatting is taken care of by StyLua
 		},
 	},
-	hls = { formattingProvider = "fourmolu" },
 	taplo = {},
 	yamlls = {},
 	marksman = {},

@@ -20,14 +20,18 @@ return require("packer").startup({
 	{
 		"wbthomason/packer.nvim", -- Allow Packer to manage itself
 		{ "neovim/nvim-lspconfig", requires = "williamboman/mason-lspconfig.nvim" },
+		{ "simrat39/rust-tools.nvim", requires = { "nvim-lua/plenary.nvim" } },
+		{
+			"MrcJkb/haskell-tools.nvim",
+			requires = {
+				"neovim/nvim-lspconfig",
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope.nvim",
+			},
+		},
+		"mfussenegger/nvim-dap",
 		{ "williamboman/mason.nvim", requires = { "jayp0521/mason-nvim-dap.nvim", "jayp0521/mason-null-ls.nvim" } },
 		{ "catppuccin/nvim", as = "catppuccin" },
-		{
-			"terrortylor/nvim-comment",
-			config = function()
-				require("nvim_comment").setup()
-			end,
-		},
 		{
 			"folke/noice.nvim",
 			event = "VimEnter",
@@ -42,6 +46,26 @@ return require("packer").startup({
 								row = "90%",
 								column = "50%",
 							},
+						},
+					},
+					lsp = {
+						documentation = {
+							opts = {
+								border = { style = "rounded" },
+								relative = "cursor",
+								position = {
+									row = 2,
+								},
+								win_options = {
+									concealcursor = "n",
+									conceallevel = 3,
+								},
+							},
+						},
+						override = {
+							["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+							["vim.lsp.util.stylize_markdown"] = true,
+							["cmp.entry.get_documentation"] = true,
 						},
 					},
 				})
@@ -70,8 +94,6 @@ return require("packer").startup({
 				"kdheepak/cmp-latex-symbols",
 			},
 		},
-		{ "nvim-telescope/telescope-dap.nvim", requires = { "mfussenegger/nvim-dap" } },
-		{ "simrat39/rust-tools.nvim", requires = { "nvim-lua/plenary.nvim" } },
 		{
 			"nvim-treesitter/nvim-treesitter",
 			run = ":TSUpdate",
@@ -94,23 +116,38 @@ return require("packer").startup({
 			end,
 		},
 		{
+			"kylechui/nvim-surround",
+			tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		},
+		{
 			"nvim-telescope/telescope.nvim",
 			requires = {
 				"nvim-lua/plenary.nvim",
 				"kyazdani42/nvim-web-devicons",
 				"nvim-telescope/telescope-fzy-native.nvim",
+				"luc-tielen/telescope_hoogle",
+				"nvim-telescope/telescope-dap.nvim",
+				"nvim-telescope/telescope-file-browser.nvim",
+				"nvim-telescope/telescope-project.nvim",
 			},
 			config = function()
 				local telescope = require("telescope")
 
-				telescope.setup()
+				telescope.setup({
+					extensions = {
+						file_browser = {
+							hijack_netrw = true,
+						},
+					},
+				})
 
 				telescope.load_extension("fzy_native")
 				telescope.load_extension("file_browser")
 				telescope.load_extension("dap")
+				telescope.load_extension("hoogle")
+				telescope.load_extension("project")
 			end,
 		},
-		{ "nvim-telescope/telescope-file-browser.nvim", requires = "nvim-telescope/telescope.nvim" },
 		{ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" },
 		"lukas-reineke/indent-blankline.nvim",
 		{
@@ -156,19 +193,6 @@ return require("packer").startup({
 				require("todo-comments").setup({})
 			end,
 		},
-		{
-			"stevearc/qf_helper.nvim",
-			config = function()
-				require("qf_helper").setup()
-			end,
-		},
-		{
-			"ggandor/leap.nvim",
-			requires = "tpope/vim-repeat",
-			config = function()
-				require("leap").set_default_keymaps()
-			end,
-		},
 		"https://gitlab.com/yorickpeterse/nvim-window", -- Easy movement between windows
 		{
 			"windwp/nvim-autopairs",
@@ -176,7 +200,7 @@ return require("packer").startup({
 				require("nvim-autopairs").setup({})
 			end,
 		},
-		"echasnovski/mini.nvim",
+		"echasnovski/mini.starter",
 	},
 	rocks = {},
 	config = {
