@@ -91,15 +91,23 @@ return require("packer").startup({
 				"hrsh7th/cmp-cmdline",
 				"saadparwaiz1/cmp_luasnip",
 				"hrsh7th/cmp-nvim-lsp-signature-help",
-				"kdheepak/cmp-latex-symbols",
 			},
 		},
 		{
 			"nvim-treesitter/nvim-treesitter",
 			run = ":TSUpdate",
-			requires = "nvim-treesitter/playground",
+			requires = { "nvim-treesitter/playground", "RRethy/nvim-treesitter-textsubjects" },
 			config = function()
 				require("nvim-treesitter.configs").setup({
+					textsubjects = {
+						enable = true,
+						prev_selection = ",",
+						keymaps = {
+							["."] = "textsubjects-smart",
+							[";"] = "textsubjects-container-outer",
+							['"'] = "textsubjects-container-inner",
+						},
+					},
 					playground = {
 						enabled = true,
 					},
@@ -110,6 +118,14 @@ return require("packer").startup({
 			end,
 		},
 		{
+			"iamcco/markdown-preview.nvim",
+			run = function()
+				vim.fn["mkdp#util#install"]()
+				vim.g.mkdp_page_title = '${name}'
+			end,
+		},
+		"dhruvasagar/vim-table-mode",
+		{
 			"numToStr/FTerm.nvim",
 			config = function()
 				require("FTerm").setup({ border = "rounded", ft = "Terminal" })
@@ -117,7 +133,9 @@ return require("packer").startup({
 		},
 		{
 			"kylechui/nvim-surround",
-			tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+			config = function()
+				require("nvim-surround").setup()
+			end,
 		},
 		{
 			"nvim-telescope/telescope.nvim",

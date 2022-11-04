@@ -16,7 +16,6 @@ cmp.setup({
 				nvim_lsp = "LSP",
 				luasnip = "Snippets",
 				nvim_lua = "Lua",
-				latex_symbols = "LaTeX",
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -55,7 +54,6 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lua" },
-		{ name = "latex_symbols" },
 		{ name = "nvim_lsp_signature_help" },
 		{ name = "luasnip" },
 	}, {

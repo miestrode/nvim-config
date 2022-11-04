@@ -59,7 +59,22 @@ end
 
 local languages = {
 	pyright = {},
-	texlab = {},
+	texlab = {
+		texlab = {
+			build = {
+				onSave = true,
+				executable = "tectonic",
+				args = {
+					"-X",
+					"compile",
+					"%f",
+					"--synctex",
+					"--keep-logs",
+					"--keep-intermediates",
+				},
+			},
+		},
+	},
 	sumneko_lua = {
 		Lua = {
 			runtime = {
@@ -80,8 +95,12 @@ local languages = {
 	taplo = {},
 	yamlls = {},
 	marksman = {},
-	rome = {},
-	ltex = {},
+	ltex = {
+		ltex = {
+			ltex.completionEnabled = true,
+			checkFrequency = "save"
+		}
+	},
 }
 
 setup_langs(languages)

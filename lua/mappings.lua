@@ -15,6 +15,8 @@ map_key_with_leader("n", "fs", "<cmd>Telescope find_files<cr>", {})
 map_key_with_leader("n", "t", "<cmd>Telescope<cr>", {})
 map_key_with_leader("n", "p", "<cmd>Telescope project<cr>", {})
 map_key_with_leader("n", "ff", "<cmd>Telescope current_buffer_fuzzy_find<cr>", {})
+map_key_with_leader("n", "mp", "<cmd>MarkdownPreviewToggle<cr>", {})
+map_key_with_leader("n", "o", "<cmd>TSPlaygroundToggle<cr>", {})
 
 vim.keymap.set("n", "<A-s>", require("mini.starter").open, {})
 
