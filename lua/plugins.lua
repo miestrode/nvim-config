@@ -91,6 +91,8 @@ return require("packer").startup({
 				"hrsh7th/cmp-cmdline",
 				"saadparwaiz1/cmp_luasnip",
 				"hrsh7th/cmp-nvim-lsp-signature-help",
+				"kdheepak/cmp-latex-symbols",
+				"uga-rosa/cmp-dictionary",
 			},
 		},
 		{

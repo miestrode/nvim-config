@@ -16,6 +16,8 @@ cmp.setup({
 				nvim_lsp = "LSP",
 				luasnip = "Snippets",
 				nvim_lua = "Lua",
+				latex_symbols = "LaTeX",
+				dictionary = "Words"
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -56,6 +58,10 @@ cmp.setup({
 		{ name = "nvim_lua" },
 		{ name = "nvim_lsp_signature_help" },
 		{ name = "luasnip" },
+		{
+		 	name = "dictionary",
+			keyword_length = 2,
+		}
 	}, {
 		{ name = "buffer" },
 	}),
@@ -79,6 +85,12 @@ cmp.setup.cmdline(":", {
 	}, {
 		{ name = "cmdline" },
 	}),
+})
+
+require("cmp_dictionary").setup({
+    dic = {
+        ["*"] = "/usr/share/dict/words",
+	}
 })
 
 return require("cmp_nvim_lsp").default_capabilities()
