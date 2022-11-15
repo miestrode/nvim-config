@@ -29,8 +29,7 @@ return require("packer").startup({
 				"nvim-telescope/telescope.nvim",
 			},
 		},
-		"mfussenegger/nvim-dap",
-		{ "williamboman/mason.nvim", requires = { "jayp0521/mason-nvim-dap.nvim", "jayp0521/mason-null-ls.nvim" } },
+		{ "williamboman/mason.nvim", requires = { "jayp0521/mason-null-ls.nvim" } },
 		{ "catppuccin/nvim", as = "catppuccin" },
 		{
 			"folke/noice.nvim",
@@ -79,20 +78,14 @@ return require("packer").startup({
 			"folke/trouble.nvim",
 			requires = "kyazdani42/nvim-web-devicons",
 		},
-		"norcalli/nvim-colorizer.lua",
 		"L3MON4D3/LuaSnip",
 		{
 			"hrsh7th/nvim-cmp",
 			requires = {
-				"hrsh7th/cmp-nvim-lua",
 				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-cmdline",
 				"saadparwaiz1/cmp_luasnip",
-				"hrsh7th/cmp-nvim-lsp-signature-help",
-				"kdheepak/cmp-latex-symbols",
-				"uga-rosa/cmp-dictionary",
 			},
 		},
 		{
@@ -120,14 +113,6 @@ return require("packer").startup({
 			end,
 		},
 		{
-			"iamcco/markdown-preview.nvim",
-			run = function()
-				vim.fn["mkdp#util#install"]()
-				vim.g.mkdp_page_title = '${name}'
-			end,
-		},
-		"dhruvasagar/vim-table-mode",
-		{
 			"numToStr/FTerm.nvim",
 			config = function()
 				require("FTerm").setup({ border = "rounded", ft = "Terminal" })
@@ -139,14 +124,12 @@ return require("packer").startup({
 				require("nvim-surround").setup()
 			end,
 		},
+		"barreiroleo/ltex-extra.nvim",
 		{
 			"nvim-telescope/telescope.nvim",
 			requires = {
 				"nvim-lua/plenary.nvim",
-				"kyazdani42/nvim-web-devicons",
 				"nvim-telescope/telescope-fzy-native.nvim",
-				"luc-tielen/telescope_hoogle",
-				"nvim-telescope/telescope-dap.nvim",
 				"nvim-telescope/telescope-file-browser.nvim",
 				"nvim-telescope/telescope-project.nvim",
 			},
@@ -163,8 +146,6 @@ return require("packer").startup({
 
 				telescope.load_extension("fzy_native")
 				telescope.load_extension("file_browser")
-				telescope.load_extension("dap")
-				telescope.load_extension("hoogle")
 				telescope.load_extension("project")
 			end,
 		},
@@ -173,12 +154,6 @@ return require("packer").startup({
 		{
 			"nvim-lualine/lualine.nvim",
 			requires = { "kyazdani42/nvim-web-devicons", opt = true },
-		},
-		{
-			"NMAC427/guess-indent.nvim",
-			config = function()
-				require("guess-indent").setup({})
-			end,
 		},
 		{
 			"saecki/crates.nvim",
@@ -199,14 +174,6 @@ return require("packer").startup({
 		},
 		"jose-elias-alvarez/null-ls.nvim",
 		{
-			"danymat/neogen",
-			config = function()
-				require("neogen").setup({})
-			end,
-			requires = "nvim-treesitter/nvim-treesitter",
-			tag = "*",
-		},
-		{
 			"folke/todo-comments.nvim",
 			requires = "nvim-lua/plenary.nvim",
 			config = function()
@@ -222,7 +189,6 @@ return require("packer").startup({
 		},
 		"echasnovski/mini.starter",
 	},
-	rocks = {},
 	config = {
 		display = {
 			open_fn = function()

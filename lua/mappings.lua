@@ -6,7 +6,7 @@ end
 
 local fterm = require("FTerm")
 
-map_key_with_leader("n", "e", "<cmd>TroubleToggle<cr>", {}) -- Toggle the pretty error list
+map_key_with_leader("n", "e", "<cmd>TroubleToggle<cr>", {})
 vim.keymap.set("t", "<A-t>", fterm.toggle, {})
 vim.keymap.set("n", "<A-t>", fterm.toggle, {})
 vim.keymap.set("n", "<A-k>", "ddkPk<cr>")
@@ -15,16 +15,9 @@ map_key_with_leader("n", "fs", "<cmd>Telescope find_files<cr>", {})
 map_key_with_leader("n", "t", "<cmd>Telescope<cr>", {})
 map_key_with_leader("n", "p", "<cmd>Telescope project<cr>", {})
 map_key_with_leader("n", "ff", "<cmd>Telescope current_buffer_fuzzy_find<cr>", {})
-map_key_with_leader("n", "mp", "<cmd>MarkdownPreviewToggle<cr>", {})
 map_key_with_leader("n", "o", "<cmd>TSPlaygroundToggle<cr>", {})
 
 vim.keymap.set("n", "<A-s>", require("mini.starter").open, {})
-
--- Keybindings for Neogen, used for generating documentation
-map_key_with_leader("n", "dd", require("neogen").generate, {})
-map_key_with_leader("n", "df", '<cmd>lua require("neogen").generate {type = "func"}<cr>', {})
-map_key_with_leader("n", "ds", '<cmd>lua require("neogen").generate {type = "class"}<cr>', {})
-map_key_with_leader("n", "dg", '<cmd>lua require("neogen").generate {type = "file"}<cr>', {})
 
 map_key_with_leader("n", "w", require("nvim-window").pick, {})
 map_key_with_leader("n", "h", "<cmd>BufferLinePick<cr>", {})

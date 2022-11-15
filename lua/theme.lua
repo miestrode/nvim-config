@@ -26,8 +26,6 @@ require("bufferline").setup({
 
 require("startup")
 
-require("colorizer").setup({ "css", "scss", "html" })
-
 return {
 	Text = "",
 	Method = "",
@@ -41,7 +39,7 @@ return {
 	Property = "",
 	Unit = "塞",
 	Value = "",
-	Enum = "",
+	Enum = "",
 	Keyword = "",
 	Snippet = "",
 	Color = "",

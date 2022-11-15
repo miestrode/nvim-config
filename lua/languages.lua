@@ -21,27 +21,17 @@ require("mason").setup({
 	max_concurrent_installers = 10,
 })
 require("mason-lspconfig").setup({
-	ensure_installed = { "rust_analyzer" },
+	ensure_installed = { "rust_analyzer", "haskell-language-server" },
 	automatic_installation = true,
 })
 require("mason-null-ls").setup({
 	automatic_installation = true,
 })
-require("mason-nvim-dap").setup({
-	automatic_installation = true,
-})
-
-local extension_path = vim.env.HOME .. "./local/share/nvim/mason/packages/codelldb/"
-local codelldb_path = extension_path .. "adapter/codelldb"
-local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
 require("rust-tools").setup({
 	server = {
 		on_attach = on_attach,
 		capabilities = capabilities,
-	},
-	dap = {
-		adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
 	},
 })
 
@@ -50,6 +40,26 @@ require("haskell-tools").setup({
 })
 
 local lsp_config = require("lspconfig")
+
+require("lspconfig").ltex.setup({
+	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		on_attach(client, bufnr)
+
+		require("ltex_extra").setup({
+			load_langs = { "en-US" },
+			init_check = true,
+			path = nil,
+			log_level = "none",
+		})
+	end,
+	settings = {
+		ltex = {
+			completionEnabled = true,
+			checkFrequency = "save",
+		},
+	},
+})
 
 local function setup_langs(languages)
 	for language, settings in pairs(languages) do
@@ -68,9 +78,6 @@ local languages = {
 					"-X",
 					"compile",
 					"%f",
-					"--synctex",
-					"--keep-logs",
-					"--keep-intermediates",
 				},
 			},
 		},
@@ -95,12 +102,6 @@ local languages = {
 	taplo = {},
 	yamlls = {},
 	marksman = {},
-	ltex = {
-		ltex = {
-			ltex.completionEnabled = true,
-			checkFrequency = "save"
-		}
-	},
 }
 
 setup_langs(languages)

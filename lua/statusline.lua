@@ -13,7 +13,14 @@ require("lualine").setup({
 		lualine_x = {
 			"diagnostics",
 		},
-		lualine_y = { "filetype", "progress" },
+		lualine_y = {
+			{
+				"filetype",
+				colored = true,
+				icon_only = true,
+			},
+			"progress",
+		},
 		lualine_z = {
 			{ "location", separator = { right = "" }, left_padding = 2 },
 		},
@@ -23,7 +30,14 @@ require("lualine").setup({
 		lualine_b = { "filename", "branch" },
 		lualine_c = { "filesize", "diff" },
 		lualine_x = { "diagnostics" },
-		lualine_y = { "filetype", "progress" },
+		lualine_y = {
+			{
+				"filetype",
+				colored = true,
+				icon_only = true,
+			},
+			"progress",
+		},
 		lualine_z = { { "location", left_padding = 2 } },
 	},
 	ignore_focus = {},
