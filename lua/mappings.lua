@@ -39,6 +39,7 @@ return function(client, bufnr)
 		vim.lsp.buf.format({ async = true })
 	end, bufopts)
 	map_key_with_leader("n", "ss", "<cmd>Telescope lsp_workspace_symbols<cr>", bufopts)
+	map_key_with_leader("n", "sg", "<cmd>Telescope lsp_document_symbols<cr>", bufopts)
 
 	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 		update_in_insert = true,

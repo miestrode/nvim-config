@@ -21,14 +21,6 @@ return require("packer").startup({
 		"wbthomason/packer.nvim", -- Allow Packer to manage itself
 		{ "neovim/nvim-lspconfig", requires = "williamboman/mason-lspconfig.nvim" },
 		{ "simrat39/rust-tools.nvim", requires = { "nvim-lua/plenary.nvim" } },
-		{
-			"MrcJkb/haskell-tools.nvim",
-			requires = {
-				"neovim/nvim-lspconfig",
-				"nvim-lua/plenary.nvim",
-				"nvim-telescope/telescope.nvim",
-			},
-		},
 		{ "williamboman/mason.nvim", requires = { "jayp0521/mason-null-ls.nvim" } },
 		{ "catppuccin/nvim", as = "catppuccin" },
 		{
@@ -87,6 +79,12 @@ return require("packer").startup({
 				"hrsh7th/cmp-cmdline",
 				"saadparwaiz1/cmp_luasnip",
 			},
+		},
+		{
+			"LhKipp/nvim-nu",
+			config = function()
+				require("nu").setup({})
+			end,
 		},
 		{
 			"nvim-treesitter/nvim-treesitter",

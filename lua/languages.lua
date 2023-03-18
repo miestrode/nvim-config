@@ -21,10 +21,7 @@ require("mason").setup({
 	max_concurrent_installers = 10,
 })
 require("mason-lspconfig").setup({
-	ensure_installed = { "rust_analyzer", "haskell-language-server" },
-	automatic_installation = true,
-})
-require("mason-null-ls").setup({
+	ensure_installed = { "rust_analyzer" },
 	automatic_installation = true,
 })
 
@@ -32,11 +29,12 @@ require("rust-tools").setup({
 	server = {
 		on_attach = on_attach,
 		capabilities = capabilities,
+        settings = {
+            cargo = {
+                target = "x86_64-unknown-linux-gnu"
+            }
+        }
 	},
-})
-
-require("haskell-tools").setup({
-	hls = { on_attach = on_attach, capabilities = capabilities, settings = { formattingProvider = "fourmolu" } },
 })
 
 local lsp_config = require("lspconfig")
@@ -69,6 +67,7 @@ end
 
 local languages = {
 	pyright = {},
+    jdtls = {},
 	texlab = {
 		texlab = {
 			build = {
@@ -82,7 +81,7 @@ local languages = {
 			},
 		},
 	},
-	sumneko_lua = {
+	lua_ls = {
 		Lua = {
 			runtime = {
 				version = "LuaJIT",
@@ -107,9 +106,13 @@ local languages = {
 setup_langs(languages)
 
 local null = require("null-ls")
+
+require("mason-null-ls").setup({
+	automatic_installation = true,
+})
+
 local formatting = null.builtins.formatting
-local diagnostics = null.builtins.diagnostics
 
 null.setup({
-	sources = { formatting.prettierd, formatting.black, formatting.stylua, diagnostics.alex },
+	sources = { formatting.prettierd, formatting.black, formatting.stylua },
 })
